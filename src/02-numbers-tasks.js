@@ -213,7 +213,7 @@ function isPrime(n) {
   //     return false;
   //   }
   // }
-  return true;
+  return n && true;
 }
 
 /**
