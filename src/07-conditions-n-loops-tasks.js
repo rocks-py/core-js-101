@@ -27,8 +27,11 @@
  *  21 => 'Fizz'
  *
  */
-function getFizzBuzz(/* num */) {
-  throw new Error('Not implemented');
+function getFizzBuzz(num) {
+  if (num % 15 === 0) return 'FizzBuzz';
+  if (num % 5 === 0) return 'Buzz';
+  if (num % 3 === 0) return 'Fizz';
+  return num;
 }
 
 
@@ -43,8 +46,12 @@ function getFizzBuzz(/* num */) {
  *   5  => 120
  *   10 => 3628800
  */
-function getFactorial(/* n */) {
-  throw new Error('Not implemented');
+function getFactorial(n) {
+  let acc = 1;
+  for (let i = 2; i <= n; i += 1) {
+    acc *= i;
+  }
+  return acc;
 }
 
 
@@ -60,8 +67,12 @@ function getFactorial(/* n */) {
  *   5,10  =>  45 ( = 5+6+7+8+9+10 )
  *   -1,1  =>  0  ( = -1 + 0 + 1 )
  */
-function getSumBetweenNumbers(/* n1, n2 */) {
-  throw new Error('Not implemented');
+function getSumBetweenNumbers(n1, n2) {
+  let acc = 0;
+  for (let i = n1; i <= n2; i += 1) {
+    acc += i;
+  }
+  return acc;
 }
 
 
@@ -80,8 +91,9 @@ function getSumBetweenNumbers(/* n1, n2 */) {
  *   10,1,1   =>  false
  *   10,10,10 =>  true
  */
-function isTriangle(/* a, b, c */) {
-  throw new Error('Not implemented');
+function isTriangle(a, b, c) {
+  const res = (a >= b + c) || (b >= a + c) || (c >= b + a);
+  return !res;
 }
 
 
@@ -118,6 +130,27 @@ function isTriangle(/* a, b, c */) {
  *
  */
 function doRectanglesOverlap(/* rect1, rect2 */) {
+  // const f = function f(rectA, rectB) {
+  //   const aX = rectA.left;
+  //   const aY = rectA.top;
+  //   const bX = rectA.left + rectA.width;
+  //   const bY = rectA.top;
+  //   const cX = rectA.left + rectA.width;
+  //   const cY = rectA.top + rectA.height;
+  //   const dX = rectA.left;
+  //   const dY = rectA.top + rectA.height;
+
+  //   if ((aX >= rectB.left && aX <= rectB.left + rectB.width)
+  //     || (aY >= rectB.top && aY <= rectB.top + rectB.height)) return true;
+  //   if ((bX >= rectB.left && bX <= rectB.left + rectB.width)
+  //     || (bY >= rectB.top && bY <= rectB.top + rectB.height)) return true;
+  //   if ((cX >= rectB.left && cX <= rectB.left + rectB.width)
+  //     || (cY >= rectB.top && cY <= rectB.top + rectB.height)) return true;
+  //   if ((dX >= rectB.left && dX <= rectB.left + rectB.width)
+  //     || (dY >= rectB.top && dY <= rectB.top + rectB.height)) return true;
+  //   return false;
+  // };
+  // return f(rect1, rect2) || f(rect2, rect1);
   throw new Error('Not implemented');
 }
 
@@ -148,8 +181,8 @@ function doRectanglesOverlap(/* rect1, rect2 */) {
  *   { center: { x:0, y:0 }, radius:10 },  { x:10, y:10 }   => false
  *
  */
-function isInsideCircle(/* circle, point */) {
-  throw new Error('Not implemented');
+function isInsideCircle(circle, point) {
+  return (circle.center.x - point.x) ** 2 + (circle.center.y - point.y) ** 2 < circle.radius ** 2;
 }
 
 
@@ -165,6 +198,22 @@ function isInsideCircle(/* circle, point */) {
  *   'entente' => null
  */
 function findFirstSingleChar(/* str */) {
+  // const arr = str.split('');
+  // const obj = {};
+  // arr.map((x) => {
+  //   if (obj[x] > 0) {
+  //     obj[x] += 1;
+  //   } else {
+  //     obj[x] = 1;
+  //   }
+  //   return x;
+  // });
+  // const unique = [];
+  // Object.entries(obj).map(([key, value]) => {
+  //   if (value === 1) unique.push(key);
+  //   return null;
+  // });
+  // const indexes = unique.map()
   throw new Error('Not implemented');
 }
 
