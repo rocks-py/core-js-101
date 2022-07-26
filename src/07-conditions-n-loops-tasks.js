@@ -129,29 +129,19 @@ function isTriangle(a, b, c) {
  *   { top:20, left:20, width: 20, height: 20 }    =>  false
  *
  */
-function doRectanglesOverlap(/* rect1, rect2 */) {
-  // const f = function f(rectA, rectB) {
-  //   const aX = rectA.left;
-  //   const aY = rectA.top;
-  //   const bX = rectA.left + rectA.width;
-  //   const bY = rectA.top;
-  //   const cX = rectA.left + rectA.width;
-  //   const cY = rectA.top + rectA.height;
-  //   const dX = rectA.left;
-  //   const dY = rectA.top + rectA.height;
+function doRectanglesOverlap(rect1, rect2) {
+  const x1 = rect1.left;
+  const y1 = rect1.top;
+  const x2 = rect1.left + rect1.width;
+  const y2 = rect1.top + rect1.height;
 
-  //   if ((aX >= rectB.left && aX <= rectB.left + rectB.width)
-  //     || (aY >= rectB.top && aY <= rectB.top + rectB.height)) return true;
-  //   if ((bX >= rectB.left && bX <= rectB.left + rectB.width)
-  //     || (bY >= rectB.top && bY <= rectB.top + rectB.height)) return true;
-  //   if ((cX >= rectB.left && cX <= rectB.left + rectB.width)
-  //     || (cY >= rectB.top && cY <= rectB.top + rectB.height)) return true;
-  //   if ((dX >= rectB.left && dX <= rectB.left + rectB.width)
-  //     || (dY >= rectB.top && dY <= rectB.top + rectB.height)) return true;
-  //   return false;
-  // };
-  // return f(rect1, rect2) || f(rect2, rect1);
-  throw new Error('Not implemented');
+  const x3 = rect2.left;
+  const y3 = rect2.top;
+  const x4 = rect2.left + rect2.width;
+  const y4 = rect2.top + rect2.height;
+
+  if ((x1 < x4) && (x3 < x2) && (y1 < y4) && (y3 < y2)) return true;
+  return false;
 }
 
 
@@ -197,24 +187,14 @@ function isInsideCircle(circle, point) {
  *   'abracadabra'  => 'c'
  *   'entente' => null
  */
-function findFirstSingleChar(/* str */) {
-  // const arr = str.split('');
-  // const obj = {};
-  // arr.map((x) => {
-  //   if (obj[x] > 0) {
-  //     obj[x] += 1;
-  //   } else {
-  //     obj[x] = 1;
-  //   }
-  //   return x;
-  // });
-  // const unique = [];
-  // Object.entries(obj).map(([key, value]) => {
-  //   if (value === 1) unique.push(key);
-  //   return null;
-  // });
-  // const indexes = unique.map()
-  throw new Error('Not implemented');
+function findFirstSingleChar(str) {
+  for (let i = 0; i < str.length; i += 1) {
+    const c = str.charAt(i);
+    if (str.indexOf(c) === i && str.indexOf(c, i + 1) === -1) {
+      return c;
+    }
+  }
+  return null;
 }
 
 
@@ -240,8 +220,8 @@ function findFirstSingleChar(/* str */) {
  *   5, 3, true, true   => '[3, 5]'
  *
  */
-function getIntervalString(/* a, b, isStartIncluded, isEndIncluded */) {
-  throw new Error('Not implemented');
+function getIntervalString(a, b, isStartIncluded, isEndIncluded) {
+  return `${isStartIncluded ? '[' : '('}${Math.min(a, b)}, ${Math.max(a, b)}${isEndIncluded ? ']' : ')'}`;
 }
 
 
@@ -257,8 +237,8 @@ function getIntervalString(/* a, b, isStartIncluded, isEndIncluded */) {
  * 'rotator' => 'rotator'
  * 'noon' => 'noon'
  */
-function reverseString(/* str */) {
-  throw new Error('Not implemented');
+function reverseString(str) {
+  return str.split('').reverse().join('');
 }
 
 
@@ -274,8 +254,8 @@ function reverseString(/* str */) {
  *   87354 => 45378
  *   34143 => 34143
  */
-function reverseInteger(/* num */) {
-  throw new Error('Not implemented');
+function reverseInteger(num) {
+  return num.toString().split('').reverse().join('');
 }
 
 
@@ -300,6 +280,21 @@ function reverseInteger(/* num */) {
  *   4916123456789012 => false
  */
 function isCreditCardNumber(/* ccn */) {
+  // const value = ccn.toString().replace(/\D/g, '');
+  // let nCheck = 0;
+  // let bEven = false;
+  // for (let n = value.length - 1; n >= 0; n -= 1) {
+  //   let nDigit = parseInt(value.charAt(n), 10);
+  //   nDigit *= 2;
+  //   if (bEven && nDigit > 9) {
+  //     nDigit -= 9;
+  //   }
+
+  //   nCheck += nDigit;
+  //   bEven = !bEven;
+  // }
+
+  // return (nCheck % 10) === 0;
   throw new Error('Not implemented');
 }
 
@@ -317,8 +312,18 @@ function isCreditCardNumber(/* ccn */) {
  *   10000 ( 1+0+0+0+0 = 1 ) => 1
  *   165536 (1+6+5+5+3+6 = 26,  2+6 = 8) => 8
  */
-function getDigitalRoot(/* num */) {
-  throw new Error('Not implemented');
+function getDigitalRoot(num) {
+  let n = num;
+  let root = 0;
+  while (n > 0 || root > 9) {
+    if (n === 0) {
+      n = root;
+      root = 0;
+    }
+    root += n % 10;
+    n = parseInt(n / 10, 10);
+  }
+  return root;
 }
 
 
@@ -343,8 +348,28 @@ function getDigitalRoot(/* num */) {
  *   '{)' = false
  *   '{[(<{[]}>)]}' = true
  */
-function isBracketsBalanced(/* str */) {
-  throw new Error('Not implemented');
+function isBracketsBalanced(str) {
+  const stack = [];
+  const m = {
+    '(': ')',
+    '[': ']',
+    '{': '}',
+    '<': '>',
+  };
+  const openBrackets = Object.keys(m);
+  for (let i = 0; i < str.length; i += 1) {
+    const bracket = str[i];
+    if (openBrackets.includes(bracket)) {
+      stack.push(m[bracket]);
+    } else {
+      const elem = stack.pop();
+      if (elem !== bracket) {
+        return false;
+      }
+    }
+  }
+  if (stack.length > 0) return false;
+  return true;
 }
 
 
@@ -368,8 +393,14 @@ function isBracketsBalanced(/* str */) {
  *    365, 4  => '11231'
  *    365, 10 => '365'
  */
-function toNaryString(/* num, n */) {
-  throw new Error('Not implemented');
+function toNaryString(num, n) {
+  let num1 = num;
+  const arr = [];
+  while (num1 !== 0) {
+    arr.push(num1 % n);
+    num1 = Math.floor(num1 / n);
+  }
+  return arr.reverse().join('');
 }
 
 
@@ -385,8 +416,20 @@ function toNaryString(/* num, n */) {
  *   ['/web/assets/style.css', '/.bin/mocha',  '/read.me'] => '/'
  *   ['/web/favicon.ico', '/web-scripts/dump', '/verbalizer/logs'] => '/'
  */
-function getCommonDirectoryPath(/* pathes */) {
-  throw new Error('Not implemented');
+function getCommonDirectoryPath(pathes) {
+  let k = pathes[0].length;
+  for (let i = 1; i < pathes.length; i += 1) {
+    k = Math.min(k, pathes[i].length);
+    for (let j = 0; j < k; j += 1) {
+      if (pathes[i][j] !== pathes[0][j]) {
+        k = j;
+        break;
+      }
+    }
+  }
+  const res = pathes[0].slice(0, k);
+  const last = res.lastIndexOf('/');
+  return res.slice(0, last + 1);
 }
 
 
